@@ -41,7 +41,6 @@ class SearchBooks extends Component{
             <div className="search-books-results">
               
                 <ol className="books-grid">
-                  {this.state.foundBooks.length>0 && console.log(this.state.foundBooks[0].imageLinks.thumbnail)}
                   {this.state.foundBooks.length>0 && this.state.foundBooks.map(item => (
                     <li>
                         <div className="book">
