@@ -23,7 +23,7 @@ class SearchBooks extends Component{
     // search only if query exists
     this.setState({query: query.trim()})
     this.state.query.length>0 && BooksAPI.search(query.trim()).then(books =>{
-      if(books.length>0){
+      if(Array.isArray(books) && books.length>0){
         let shelfBooks = this.props.shelfBooks
         for (let book of books) {
           book.shelf = "none"
