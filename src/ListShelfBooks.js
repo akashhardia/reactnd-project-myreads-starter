@@ -1,15 +1,17 @@
 import React, {Component} from 'react'
+import SeparateBook from './SeparateBook.js' 
 import {Link} from 'react-router-dom'
+import {PropTypes} from 'prop-types'
 
-class ListBooks extends Component{
+class ListShelfBooks extends Component{
 
-  const books = this.props.books;
-  
-  updateBook=(shelf, book)=>{
-    this.props.updateBook(shelf,book);
+  static propTypes = {
+    shelfBooks: PropTypes.array.isRequired,
+    updateBook: PropTypes.func.isRequired
   }
-
+  
   render(){
+    const books = this.props.shelfBooks;
     return(
     	<div className="list-books">
             <div className="list-books-title">
@@ -24,7 +26,9 @@ class ListBooks extends Component{
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">                      
-                        
+                        {books.map((book, i) => (<SeparateBook book={book} key={i} changeShelf={(shelf) => {
+                          this.props.updateBook(shelf,book)
+                        }}/>))}
                     </ol>
                   </div>
                 </div>
@@ -35,7 +39,9 @@ class ListBooks extends Component{
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                       
+                        {books.map((book, i) => (<SeparateBook book={book} key={i} changeShelf={(shelf) => {
+                          this.props.updateBook(shelf,book)
+                        }}/>))}
                     </ol>
                   </div>
                 </div>
@@ -46,7 +52,9 @@ class ListBooks extends Component{
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                                 
+                        {books.map((book, i) => (<SeparateBook book={book} key={i} changeShelf={(shelf) => {
+                          this.props.updateBook(shelf,book)
+                        }}/>))}             
                     </ol>
                   </div>
                 </div>
@@ -59,4 +67,4 @@ class ListBooks extends Component{
     	)
 	}
 }
-export default ListBooks 
+export default ListShelfBooks
