@@ -11,7 +11,13 @@ class ListShelfBooks extends Component{
   }
   
   render(){
-    const books = this.props.shelfBooks;
+    let books = this.props.shelfBooks;
+                      var currentlyReading = books.filter((book) => (book.shelf === "currentlyReading"));
+                      var wantToRead=books.filter((book) => (book.shelf === "wantToRead"));
+                      var read=books.filter((book) => (book.shelf === "read"))
+
+
+
     return(
     	<div className="list-books">
             <div className="list-books-title">
@@ -21,25 +27,29 @@ class ListShelfBooks extends Component{
               <div>
 
 
-
+                {
+                  // Currently Reading
+                }                           
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">                      
-                        {books.map((book, i) => (<SeparateBook book={book} key={i} changeShelf={(shelf) => {
+                        {currentlyReading.length>0 && currentlyReading.map((book, i) => (<SeparateBook book={book} key={i} changeShelf={(shelf) => {
                           this.props.updateBook(shelf,book)
                         }}/>))}
                     </ol>
                   </div>
                 </div>
+                  
 
-
-
+                {
+                  // Want to Read
+                }
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {books.map((book, i) => (<SeparateBook book={book} key={i} changeShelf={(shelf) => {
+                        {wantToRead.length>0 && wantToRead.map((book, i) => (<SeparateBook book={book}  key={i} changeShelf={(shelf) => {
                           this.props.updateBook(shelf,book)
                         }}/>))}
                     </ol>
@@ -47,17 +57,19 @@ class ListShelfBooks extends Component{
                 </div>
 
 
-
+                {
+                  // Read
+                }
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {books.map((book, i) => (<SeparateBook book={book} key={i} changeShelf={(shelf) => {
+                        {read.length>0 && read.map((book, i) => (<SeparateBook book={book} key={i} changeShelf={(shelf) => {
                           this.props.updateBook(shelf,book)
                         }}/>))}             
                     </ol>
                   </div>
-                </div>
+                </div>                
               </div>
             </div>
             <div className="open-search">
