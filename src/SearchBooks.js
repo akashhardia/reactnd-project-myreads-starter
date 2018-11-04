@@ -24,7 +24,7 @@ class SearchBooks extends Component{
     this.setState({query: query.trim()})
     this.state.query.length>0 && BooksAPI.search(query.trim()).then(books =>{
       if(books.length>0){
-        var shelfBooks = this.props.shelfBooks
+        let shelfBooks = this.props.shelfBooks
         for (let book of books) {
           book.shelf = "none"
         }
@@ -36,10 +36,12 @@ class SearchBooks extends Component{
             }
           }
         }
+
+        // changing foundbooks in state to books
+        this.setState({foundBooks: books})
       }
 
-      // changing foundbooks in state to books
-      this.setState({foundBooks: books})
+      
     })
   }
 
